@@ -31,9 +31,14 @@ async def create_file(file: Annotated[bytes, File()]):
     #return {"Testfile":excel.sheetnames}
     #return {"file_size": len(file)}
 
+# @app.post("/uploadfile/")
+# async def create_upload_file(file: UploadFile):
+#     return {"filename": file.filename}
+
 @app.post("/uploadfile/")
-async def create_upload_file(file: UploadFile):
-    return {"filename": file.filename}
+def upload_file():
+    excel_send = "D:/excel_test/ontester.xlsx"
+    return FileResponse(excel_send, media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Union[str, None] = None):

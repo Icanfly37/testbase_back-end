@@ -1,10 +1,15 @@
+import 'dart:io';
+
 import 'package:http/http.dart'as http;
-import 'package:http_parser/http_parser.dart';
+//import 'package:flutter/material.dart';
+//import 'package:http_parser/http_parser.dart';
+//import 'package:path_provider/path_provider.dart';
 
 
 void main() {
   //runApp(MyApp());
-  sendExcelFile();
+  //sendExcelFile();
+  downloadExcel();
 }
 
 // Future<void> uploadFile() async {
@@ -43,3 +48,21 @@ Future<void> sendExcelFile() async {
     print('Error: $e');
   }
 }
+
+Future<void> downloadExcel() async {
+    final response = await http.post(Uri.parse('http://127.0.0.1:8000/uploadfile/'));
+
+    if (response.statusCode == 200) {
+      // final appDocDir = await getApplicationDocumentsDirectory();
+      // final excelFilePath = '${appDocDir.path}/sample_excel.xlsx';
+      const excelFilePath = 'C:/Users/icanfly37/Desktop/testexcelrecieve/sample_excel.xlsx';
+
+      // Save the downloaded file to the app's documents directory
+      final file = File(excelFilePath);
+      await file.writeAsBytes(response.bodyBytes);
+
+      // Handle the downloaded file as needed, e.g., open it with a plugin or display it.
+    } else {
+      throw Exception('Failed to download Excel file');
+    }
+  }

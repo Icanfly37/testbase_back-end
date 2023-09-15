@@ -23,6 +23,7 @@ void main() async{
 }
 
 class api_operator{
+  //send Excel file from frontend to backend
   Future<void> sendExcelFile(String path) async {
     try {
       // Replace with the URL of your API endpoint
@@ -48,7 +49,7 @@ class api_operator{
       print('Error: $e');
     }
   }
-
+  //get Excel file from backend to frontend
   Future<void> getExcelFile(String path_for_export) async {
     final response = await http.post(Uri.parse('http://127.0.0.1:8000/uploadfile/'));
 
@@ -67,6 +68,7 @@ class api_operator{
     }
   }
 
+  //send data from frontend to backend
   Future<Map<dynamic, dynamic>> getdata() async{
     final url = Uri.parse('http://127.0.0.1:8000/test'); // Replace with your FastAPI endpoint
     final response = await http.post(url);
@@ -83,6 +85,7 @@ class api_operator{
     }
   }
 
+  //get data from backend to frontend
   Future<void> senddata(final Map<dynamic, dynamic> data) async {
   final url = Uri.parse('http://127.0.0.1:8000/items/'); // Replace with your FastAPI endpoint
   final Map<String, String> headers = {

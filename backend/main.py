@@ -16,12 +16,12 @@ class Item(BaseModel):
 def read_root():
     return {"message": "Hello, World!"}
 
-#getdata
+#senddata
 @app.post("/test")
 def read_root():
     return {0: {"Test": {"message": "Hello, World!"}}}
 
-#senddata
+#getdata
 @app.post("/items/")
 async def create_item(data: dict):
     print(data)

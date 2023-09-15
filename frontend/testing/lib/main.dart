@@ -68,7 +68,7 @@ class api_operator{
     }
   }
 
-  //send data from frontend to backend
+  //get data from backend to frontend
   Future<Map<dynamic, dynamic>> getdata() async{
     final url = Uri.parse('http://127.0.0.1:8000/test'); // Replace with your FastAPI endpoint
     final response = await http.post(url);
@@ -85,7 +85,7 @@ class api_operator{
     }
   }
 
-  //get data from backend to frontend
+  //send data from frontend to backend
   Future<void> senddata(final Map<dynamic, dynamic> data) async {
   final url = Uri.parse('http://127.0.0.1:8000/items/'); // Replace with your FastAPI endpoint
   final Map<String, String> headers = {

@@ -12,9 +12,9 @@ app = FastAPI()
 def read_root():
     return {"message": "Hello, World!"}
 
-@app.get("/test")
-def read_root(name):
-    return {"message": str(name)}
+@app.post("/test")
+def read_root():
+    return {0: {"Test": {"message": "Hello, World!"}}}
 
 @app.post("/files/")
 async def create_file(file: Annotated[bytes, File()]):
@@ -26,14 +26,6 @@ async def create_file(file: Annotated[bytes, File()]):
     print(sheets)
     print(rows)
     return {"allsheet":sheets,"rows":rows}
-    #excel = load_workbook(BytesIO(file))
-    
-    #return {"Testfile":excel.sheetnames}
-    #return {"file_size": len(file)}
-
-# @app.post("/uploadfile/")
-# async def create_upload_file(file: UploadFile):
-#     return {"filename": file.filename}
 
 @app.post("/uploadfile/")
 def upload_file():

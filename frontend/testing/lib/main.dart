@@ -46,11 +46,13 @@ class api_operator{
       if (response.statusCode == 200) {
         // File uploaded successfully
         print('File uploaded successfully');
+        exit(0);
       } else {
         // File upload failed
         print('File upload failed with status code: ${response.statusCode}');
+        exit(0);
       }
-      print("d5");
+      //print("d5");
     } catch (e) {
       // Handle errors
       print('Error: $e');

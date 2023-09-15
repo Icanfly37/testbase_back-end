@@ -1,15 +1,23 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:http/http.dart'as http;
 
 
 void main() async{
   var op = api_operator();
   op.sendExcelFile("D:/excel_test/test.xlsx");
+
   String path_target = "C:/Users/icanfly37/Desktop/testexcelrecieve/";
-  op.downloadExcel("${path_target}sample_excel.xlsx");
+  op.getExcelFile("${path_target}sample_excel.xlsx");
+
+  final Map<dynamic, dynamic> data = {
+    "name": 1,
+    "description": ["Sendit"],
+    "flow": {'sendit':1.5}
+  };
+  op.senddata(data);
+  
   var geter = await op.getdata(); 
   print(geter);
 }
@@ -18,7 +26,7 @@ class api_operator{
   Future<void> sendExcelFile(String path) async {
     try {
       // Replace with the URL of your API endpoint
-      final apiUrl = Uri.parse('http://127.0.0.1:8000/files/');
+      final apiUrl = Uri.parse('http://127.0.0.1:8000/downloadfiles/');
       
       // Replace with the path to your Excel file
       String excelFilePath = path;
@@ -41,7 +49,7 @@ class api_operator{
     }
   }
 
-  Future<void> downloadExcel(String path_for_export) async {
+  Future<void> getExcelFile(String path_for_export) async {
     final response = await http.post(Uri.parse('http://127.0.0.1:8000/uploadfile/'));
 
     if (response.statusCode == 200) {
@@ -74,5 +82,28 @@ class api_operator{
       throw Exception('Failed to load data');
     }
   }
+
+  Future<void> senddata(final Map<dynamic, dynamic> data) async {
+  final url = Uri.parse('http://127.0.0.1:8000/items/'); // Replace with your FastAPI endpoint
+  final Map<String, String> headers = {
+    'Content-Type': 'application/json',
+  };
+  //this is what do you want to send
+
+  final response = await http.post(
+    url,
+    headers: headers,
+    body: json.encode(data),
+  );
+
+  if (response.statusCode == 200) {
+    // Request was successful
+    print("Data sent successfully");
+  } else {
+    // Handle errors here
+    print("Failed to send data. Status code: ${response.statusCode}");
+  }
+}
+
 }
 

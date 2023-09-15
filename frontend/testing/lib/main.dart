@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:http/http.dart'as http;
@@ -46,12 +47,15 @@ class api_operator{
       if (response.statusCode == 200) {
         // File uploaded successfully
         print('File uploaded successfully');
-        exit(0);
+        // exit(0);
       } else {
         // File upload failed
         print('File upload failed with status code: ${response.statusCode}');
-        exit(0);
+        // exit(0);
       }
+      Timer(Duration(milliseconds: 200), () { // delay time to end function
+        exit(0);
+      });
       //print("d5");
     } catch (e) {
       // Handle errors

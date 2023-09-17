@@ -3,7 +3,7 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 
 # Set up
-cred = credentials.Certificate("C:/Users/Supakij/Documents/GitHub/testbase_back-end/backend/serviceAccountKey.json")
+cred = credentials.Certificate("D:/testbase_back-end/backend/serviceAccountKey.json")
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()

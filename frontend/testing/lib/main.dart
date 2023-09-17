@@ -6,20 +6,39 @@ import 'package:http/http.dart'as http;
 
 void main() async{
   var op = api_operator();
-  op.sendExcelFile("D:/excel_test/test.xlsx");
+  //op.sendExcelFile("D:/excel_test/test.xlsx");
 
-  String path_target = "C:/Users/icanfly37/Desktop/testexcelrecieve/";
-  op.getExcelFile("${path_target}sample_excel.xlsx");
+  //String path_target = "C:/Users/icanfly37/Desktop/testexcelrecieve/";
+  //op.getExcelFile("${path_target}sample_excel.xlsx");
 
-  final Map<dynamic, dynamic> data = {
+  /*final Map<dynamic, dynamic> data = {
     "name": 1,
     "description": ["Sendit"],
     "flow": {'sendit':1.5}
   };
-  op.senddata(data);
+  op.senddata(data);*/
   
   var geter = await op.getdata(); 
+  print("THis is getdata");
+  // geter.forEach((key, value) {
+  //   print(key.toString()+":"+value);
+  // });
   print(geter);
+  //print(geter["0"]);
+  //get all keys
+  /*Iterable keys = geter.keys;
+  List keyList = keys.toList();
+  int a = int.parse(keyList[0]);
+  print(a+5+1);*/
+
+  //get all values
+  /*
+  for (String i in geter.keys){
+    //print(geter[i]);
+    for (String j in geter[i].keys){
+      print(geter[i][j]);
+    }
+  }*/
 }
 
 class api_operator{

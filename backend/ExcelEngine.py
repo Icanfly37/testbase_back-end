@@ -8,8 +8,9 @@ class Excel():
     def __init__(self,path): # path are bytes not directory names
         self.path = BytesIO(path)
         self.error = 0
-        self.rows = {}
-        self.cols = {}
+        # self.rows = {}
+        # self.cols = {}
+        self.all_object = []
     def openfile(self):
         try:
             self.excel = load_workbook(self.path)
@@ -21,17 +22,21 @@ class Excel():
     def getrows(self):
         sheet = self.excel[self.excel.sheetnames[0]]
         num_rows = sheet.max_row # จำนวนสมาชิก row สูงสุดใน sheet
-        num_cols = sheet.max_column # จำนวนสมาชิก column สูงสุดใน sheet
+        num_cols = sheet.max_column # จำนวนสมาชิก column สูงสุดใน sheet 
         for i in range(1,num_rows+1):
-            self.rows.update({"row "+str(i):each_row(sheet,i,num_rows,num_cols)}) #each_row send list datatype and collect in self.rows dict
-        return self.rows
-    def getcolumns(self):
-        sheet = self.excel[self.excel.sheetnames[0]]
-        num_rows = sheet.max_row # จำนวนสมาชิก row สูงสุดใน sheet
-        num_cols = sheet.max_column # จำนวนสมาชิก column สูงสุดใน sheet
-        for i in range(1, num_cols+1):
-            self.cols.update({"col"+str(i):each_column(sheet,i,num_cols,num_rows)}) #each_column send list datatype and collect in self.cols dict
-        return self.cols
+            if i == 1:
+                header = each_row(sheet,i,num_rows,num_cols)
+            else:
+                slave = each_row(sheet,i,num_rows,num_cols)
+                self.all_object.append(sub_object_send(i-1,header,slave))
+        return self.all_object
+    # def getcolumns(self):
+    #     sheet = self.excel[self.excel.sheetnames[0]]
+    #     num_rows = sheet.max_row # จำนวนสมาชิก row สูงสุดใน sheet
+    #     num_cols = sheet.max_column # จำนวนสมาชิก column สูงสุดใน sheet
+    #     for i in range(1, num_cols+1):
+    #         self.cols.update({"col"+str(i):each_column(sheet,i,num_cols,num_rows)}) #each_column send list datatype and collect in self.cols dict
+    #     return self.cols
     def closefile(self):
         self.excel.close()
         

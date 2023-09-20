@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:http/http.dart'as http;
 
 
-void main() async{
+void main(){
   var op = api_operator();
   //op.sendExcelFile("D:/excel_test/test.xlsx");
 
@@ -18,12 +18,12 @@ void main() async{
   };
   op.senddata(data);*/
   
-  var geter = await op.getdata(); 
-  print("THis is getdata");
+  //var geter = await op.getdata(); 
+  //print("THis is getdata");
   // geter.forEach((key, value) {
   //   print(key.toString()+":"+value);
   // });
-  print(geter);
+  //print(geter);
   //print(geter["0"]);
   //get all keys
   /*Iterable keys = geter.keys;
@@ -39,6 +39,19 @@ void main() async{
       print(geter[i][j]);
     }
   }*/
+  test_api(op);
+}
+
+void test_api(var op) async{
+  var geter = await op.getdata(); 
+  //op.sendExcelFile("C:/Users/icanfly37/Desktop/excel_tester/หลักสูตร.xlsx");
+  print("THis is getdata");
+  //print(geter);
+  List<dynamic> geterList = geter.toList();
+  for (int i = 0;i<geterList.length;i++){
+    print(geter[i]);
+    print("\n");
+  }
 }
 
 class api_operator{
@@ -88,16 +101,22 @@ class api_operator{
   }
 
   //get data from backend to frontend
-  Future<Map<dynamic, dynamic>> getdata() async{
-    final url = Uri.parse('http://127.0.0.1:8000/test'); // Replace with your FastAPI endpoint
-    final response = await http.post(url);
-
+  Future<dynamic> getdata() async{
+    //final url = Uri.parse('http://127.0.0.1:8000/test_send',Headers()); // Replace with your FastAPI endpoint
+    //final response = await http.post(url);
+    final response = await http.post(
+      Uri.parse('http://127.0.0.1:8000/test_send'),
+      headers: {"Accept-Charset": "utf-8"}, // Set the charset header
+    );
     if (response.statusCode == 200) {
       // If the server returns a 200 OK response, parse the JSON data
-      final jsonData = json.decode(response.body);
+      //String data = response.body;
+      //final jsonData = json.decode(utf8.decode(response.body));
+      final jsonResponse = json.decode(utf8.decode(response.bodyBytes));
+      return jsonResponse['getjson'];
       // Process the data as needed
       // print(jsonData);
-      return jsonData;
+      //return jsonData;
     } else {
       // If the server did not return a 200 OK response, throw an exception
       throw Exception('Failed to load data');

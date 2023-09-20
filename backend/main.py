@@ -5,12 +5,19 @@ from pydantic import BaseModel
 from ExcelEngine import *
 from openpyxl import *
 from io import *
+from jsonengine import *
+import os
 
 app = FastAPI()
 
-class Item(BaseModel):
-    name: str
-    description: str
+# class Item(BaseModel):
+#     key: str
+#     value: str
+def get_Current_Path(file_target):
+    current_directory = os.getcwd()
+    file_path = os.path.join(current_directory, file_target)
+    real_path = file_path.replace("\\", "/")
+    return real_path
 
 @app.get("/")
 def read_root():
@@ -20,6 +27,16 @@ def read_root():
 @app.post("/test")
 def read_root():
     return {0: {"Test": {"message": "Hello, World!"}}}
+
+#stub/driver
+@app.post("/test_send")
+def read_root():
+    jsoner = IsJson(get_Current_Path("data.json"))
+    jsoner.get_json_file("r")
+    send = jsoner.read_json_file()
+    jsoner.closefile("r")
+    print(send)
+    return {"getjson": send}
 
 #getdata
 @app.post("/items/")
@@ -32,13 +49,16 @@ async def create_item(data: dict):
 @app.post("/downloadfiles/")
 async def create_file(file: Annotated[bytes, File()]):
     ExcelOP = Excel(file)
+    jsoner = IsJson(get_Current_Path("data.json"))
     check = ExcelOP.openfile()
-    sheets = ExcelOP.allsheets()
+    #sheets = ExcelOP.allsheets()
     rows = ExcelOP.getrows()
+    jsoner.get_json_file("w")
+    jsoner.write_json_file(rows)
+    #cols = ExcelOP.getcolumns()
+    jsoner.closefile("w")
     ExcelOP.closefile()
-    print(sheets)
-    print(rows)
-    return {"allsheet":sheets,"rows":rows}
+    return {"rows":rows}
 
 #sendExcelFile
 @app.post("/uploadfile/")

@@ -1,6 +1,6 @@
 from openpyxl import *
 from io import *
-from rows_and_cols import *
+from Excel.rows_and_cols import *
 
 #excel = load_workbook(BytesIO(file))
 

@@ -2,7 +2,7 @@ from typing import Annotated, Union
 from fastapi import FastAPI, UploadFile,File
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
-from ExcelEngine import *
+from Excel.ExcelEngine import *
 from openpyxl import *
 from io import *
 from jsonengine import *
@@ -52,7 +52,7 @@ async def create_file(file: Annotated[bytes, File()]):
     jsoner = IsJson(get_Current_Path("data.json"))
     check = ExcelOP.openfile()
     #sheets = ExcelOP.allsheets()
-    rows = ExcelOP.getrows()
+    rows = ExcelOP.getrows() #for input to database from excel
     jsoner.get_json_file("w")
     jsoner.write_json_file(rows)
     #cols = ExcelOP.getcolumns()

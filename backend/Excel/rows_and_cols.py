@@ -7,7 +7,11 @@ def each_column(sheet,col_target,max_col,max_row):
         a = sheet.cell(row = i, column =col_target)
         if not isinstance(a,MergedCell):
             if col_target <= max_col:
-                box.append(a.value)
+                if isinstance(a.value,str):
+                    a.value.replace("\t","")
+                    box.append(a.value)
+                else:
+                    box.append(a.value)
     return box
     
 def each_row(sheet,row_target,max_rows,max_col):
@@ -16,7 +20,11 @@ def each_row(sheet,row_target,max_rows,max_col):
         a = sheet.cell(row = row_target, column = i)
         if not isinstance(a,MergedCell):
             if row_target <= max_rows:
-                box.append(a.value)
+                if isinstance(a.value,str):
+                    a.value.replace("\t","")
+                    box.append(a.value)
+                else:
+                    box.append(a.value)
     return box
 
 def sub_object_send(id,header,slave):

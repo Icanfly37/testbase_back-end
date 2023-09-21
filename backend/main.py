@@ -15,8 +15,9 @@ app = FastAPI()
 #     value: str
 def get_Current_Path(file_target):
     current_directory = os.getcwd()
-    file_path = os.path.join(current_directory, file_target)
-    real_path = file_path.replace("\\", "/")
+    port_path = current_directory.replace("\\", "/")
+    real_path = port_path+file_target
+    #real_path = file_path.replace("\\", "/")
     return real_path
 
 @app.get("/")

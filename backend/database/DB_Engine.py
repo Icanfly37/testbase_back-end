@@ -37,7 +37,7 @@ class Database():
         self.collection.document(document).update({
             field_name:firestore.DELETE_FIELD
             })
-    def delete_document(self,new_collection,document):
+    def delete_document(self,document):
         self.collection.document(document).delete()
     def delete_all_document(self):
         all_document = self.collection.stream()

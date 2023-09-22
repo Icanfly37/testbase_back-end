@@ -47,30 +47,30 @@ class Database():
         firebase_admin.delete_app(firebase_admin.get_app())
 
 
-#Initialize database
-db = Database(get_Current_Path("/backend/database/serviceAccountKey.json"))
+# #Initialize database
+# db = Database(get_Current_Path("/backend/database/serviceAccountKey.json"))
 
-#test Create Database
-data = {'basicsubject':'Wow',
-         'coursecode':4442,
-         'coursename':'null',
-         'credit':'null',
-         'teachername':'null',
-         'test':'test'}
-##test in existing collection
-collection1 = 'TestDB'
-collection2 = "TestDelete"
-doc = "testdoc"
-# new_data = {"Pre": None,
-#             "teachername": "AKA"
-#             }
-db.get_db()
-db.get_collection(collection2) #if collection is exist, use it, otherwise new collection
-#db.create_doc(data,doc)
-#db.update_db(doc,new_data)
-#output = db.read_field(doc)
-#print(output)
-#db.delete_field(doc,"Pre")
-#db.delete_document(doc)
-#close database
-db.close_db()
+# #test Create Database
+# data = {'basicsubject':'Wow',
+#          'coursecode':4442,
+#          'coursename':'null',
+#          'credit':'null',
+#          'teachername':'null',
+#          'test':'test'}
+# ##test in existing collection
+# collection1 = 'TestDB'
+# collection2 = "TestDelete"
+# doc = "testdoc"
+# # new_data = {"Pre": None,
+# #             "teachername": "AKA"
+# #             }
+# db.get_db()
+# db.get_collection(collection2) #if collection is exist, use it, otherwise new collection
+# #db.create_doc(data,doc)
+# #db.update_db(doc,new_data)
+# #output = db.read_field(doc)
+# #print(output)
+# #db.delete_field(doc,"Pre")
+# #db.delete_document(doc)
+# #close database
+# db.close_db()

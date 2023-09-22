@@ -1,12 +1,12 @@
 from openpyxl import *
-from io import *
 from Excel.rows_and_cols import *
 
 #excel = load_workbook(BytesIO(file))
 
 class Excel():
     def __init__(self,path): # path are bytes not directory names
-        self.path = BytesIO(path)
+        #self.path = BytesIO(path)
+        self.path = path
         self.error = 0
         # self.rows = {}
         # self.cols = {}

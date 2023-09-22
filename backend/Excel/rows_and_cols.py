@@ -27,7 +27,7 @@ def each_row(sheet,row_target,max_rows,max_col):
                     box.append(a.value)
     return box
 
-def sub_object_send(id,header,slave):
+def sub_object_send(header,slave):
     sub_object={}
     for i in range(len(header)):
             sub_object[header[i]] = slave[i]

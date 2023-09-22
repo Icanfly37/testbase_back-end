@@ -28,7 +28,7 @@ class Excel():
                 header = each_row(sheet,i,num_rows,num_cols)
             else:
                 slave = each_row(sheet,i,num_rows,num_cols)
-                self.all_object.append(sub_object_send(i-1,header,slave))
+                self.all_object.append(sub_object_send(header,slave))
         return self.all_object
     # def getcolumns(self):
     #     sheet = self.excel[self.excel.sheetnames[0]]

@@ -11,16 +11,6 @@ from work import *
 
 app = FastAPI()
 
-# class Item(BaseModel):
-#     key: str
-#     value: str
-def get_Current_Path(file_target):
-    current_directory = os.getcwd()
-    port_path = current_directory.replace("\\", "/")
-    real_path = port_path+file_target
-    #real_path = file_path.replace("\\", "/")
-    return real_path
-
 @app.get("/")
 def read_root():
     return {"message": "Hello, World!"}

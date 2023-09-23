@@ -4,13 +4,15 @@ import os
 from database.DB_Engine import *
 from io import *
 
-def get_Current_Path(file_target):
+def get_Current_Path(file_target): #for write
     current_directory = os.getcwd()
     port_path = current_directory.replace("\\", "/")
     real_path = port_path+file_target
-    #real_path = file_path.replace("\\", "/")
-    return real_path
+    return str(real_path)
 
+def get_file_path(file_target): #for read
+    script_dir = os.path.dirname(os.path.abspath(__file__))+file_target
+    return script_dir
 def OnJson(path,target):
     jsoner = IsJson(path)
     jsoner.get_json_file("w")
@@ -36,8 +38,5 @@ def OnExcel(file,db_collection=None):
     OnJson("data.json",rows)
     ExcelOP.closefile()
     if db_collection is not None:
-        OnDB_C("D:/testbase_back-end/backend/database/serviceAccountKey.json",db_collection,rows)
+        OnDB_C(get_file_path("\database\serviceAccountKey.json"),db_collection,rows)
     return rows
-
-# path = "C:/Users/icanfly37/Desktop/excel_tester/หลักสูตร.xlsx"
-# print(OnExcel(path))

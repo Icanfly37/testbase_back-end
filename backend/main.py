@@ -23,11 +23,12 @@ def read_root():
 #stub/driver
 @app.post("/test_send")
 def read_root():
-    jsoner = IsJson(get_Current_Path("data.json"))
-    jsoner.get_json_file("r")
-    send = jsoner.read_json_file()
-    jsoner.closefile("r")
-    print(send)
+    send = OnJson(get_Current_Path("data.json"),"r")
+    #jsoner = IsJson(get_Current_Path("data.json"))
+    #jsoner.get_json_file("r")
+    #send = jsoner.read_json_file()
+    #jsoner.closefile("r")
+    #print(send)
     return {"getjson": send}
 
 #getdata

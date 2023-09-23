@@ -13,11 +13,20 @@ def get_Current_Path(file_target): #for write
 def get_file_path(file_target): #for read
     script_dir = os.path.dirname(os.path.abspath(__file__))+file_target
     return script_dir
-def OnJson(path,target):
+
+def OnJson(path,rw,target = None):
     jsoner = IsJson(path)
-    jsoner.get_json_file("w")
-    jsoner.write_json_file(target)
-    jsoner.closefile("w")
+    jsoner.get_json_file(rw)
+    if rw == "write" or rw == "WRITE" or rw == "Write" or rw == "w" and target is not None:
+        jsoner.write_json_file(target)
+        jsoner.closefile(rw)
+    elif rw == "read" or rw == "READ" or rw == "Read" or rw == "r":
+        send = jsoner.read_json_file()
+        jsoner.closefile(rw)
+        return send
+    else:
+        jsoner.closefile(rw)
+        return None
     
 def OnDB_C(cred,collection_name,target):
     db = Database(cred)
@@ -35,7 +44,7 @@ def OnExcel(file,db_collection=None):
     #ExcelOP = Excel(file)
     ExcelOP.openfile()
     rows = ExcelOP.getrows() #for input to database from excel
-    OnJson("data.json",rows)
+    OnJson("data.json","w",rows)
     ExcelOP.closefile()
     if db_collection is not None:
         OnDB_C(get_file_path("\database\serviceAccountKey.json"),db_collection,rows)

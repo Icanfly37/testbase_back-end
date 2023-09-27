@@ -41,7 +41,7 @@ async def create_item(data: dict):
 #getExcelFile
 @app.post("/downloadfiles/")
 async def create_file(file: Annotated[bytes, File()]):
-    rows = OnExcel(file,"TestDB")
+    rows = OnExcel(file)
     #OnJson(get_Current_Path("/backend/data.json"),rows)
     #OnJson("data.json",rows)
     return {"rows":rows}

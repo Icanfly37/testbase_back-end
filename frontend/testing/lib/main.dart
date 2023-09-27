@@ -39,7 +39,8 @@ void main(){
       print(geter[i][j]);
     }
   }*/
-  test_api(op);
+  //test_api(op);
+  On_Connection(op);
 }
 
 void test_api(var op) async{
@@ -54,8 +55,38 @@ void test_api(var op) async{
   }
 }
 
+void On_Connection(var op) async{
+  var test = await op.testconnecting();
+  if (test == "Connected"){
+    print("All Done");
+  }
+  else if (test == "Refuse"){
+    print("Try To Correct Api Link");
+  }
+  else{
+    print("Try To Re-Open Your Api");
+  }
+}
+
 class api_operator{
   //send Excel file from frontend to backend
+  Future<String> testconnecting() async{
+    try{
+      final response = await http.get(Uri.parse('http://127.0.0.1:8000/e'));
+      if (response.statusCode == 200){
+        //print("Connected");
+        return ("Connected");
+      }
+      else{
+        //print("Refuse");
+        return ("Refuse");
+      }
+    } catch (e){
+      //print('Error: $e');
+      //print("Not Found");
+      return ("Not Found");
+    }
+  }
   Future<void> sendExcelFile(String path) async {
     try {
       // Replace with the URL of your API endpoint

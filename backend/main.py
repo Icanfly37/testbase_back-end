@@ -24,11 +24,6 @@ def read_root():
 @app.post("/test_send")
 def read_root():
     send = OnJson(get_Current_Path("data.json"),"r")
-    #jsoner = IsJson(get_Current_Path("data.json"))
-    #jsoner.get_json_file("r")
-    #send = jsoner.read_json_file()
-    #jsoner.closefile("r")
-    #print(send)
     return {"getjson": send}
 
 #getdata
@@ -42,8 +37,6 @@ async def create_item(data: dict):
 @app.post("/downloadfiles/")
 async def create_file(file: Annotated[bytes, File()]):
     rows = OnExcel(file,("รายวิชา","เปิดการสอน"))
-    #OnJson(get_Current_Path("/backend/data.json"),rows)
-    #OnJson("data.json",rows)
     return {"rows":rows}
 
 #sendExcelFile
@@ -51,7 +44,3 @@ async def create_file(file: Annotated[bytes, File()]):
 def upload_file():
     excel_send = "D:/excel_test/ontester.xlsx"
     return FileResponse(excel_send, media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-
-# @app.get("/items/{item_id}")
-# def read_item(item_id: int, q: Union[str, None] = None):
-#     return {"item_id": item_id, "q": q}

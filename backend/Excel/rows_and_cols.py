@@ -1,6 +1,9 @@
 from openpyxl.cell import MergedCell
 from openpyxl import *
 
+pack_for_subject = []
+pack_for_course = []
+
 def each_column(sheet,col_target,max_col,max_row):
     box = []
     for i in range(1,max_row+1):
@@ -98,5 +101,23 @@ def sub_object_send(id,header,slave):
             sub_object_1[header[i]] = pre
         else:
             sub_object_1[header[i]] = slave[i]
-        pack = [sub_object_1,sub_object_2]
+    pack_for_subject.append(sub_object_1)
+    pack_for_course.append(sub_object_2)
+        #sub_object_1={"S_ID" : "Subject_0"+id}
+        #sub_object_2={"C_ID" : "Course_0"+id}
+    pack = [sub_object_1,sub_object_2]
     return pack
+
+def get_intel():
+   #OnJson("รายวิชา.json","w",pack_for_subject)#(path,rw,target = None)
+   #OnJson("เปิดการสอน.json","w",pack_for_course)
+   subject = pack_for_subject
+   course = pack_for_course
+   #pack_for_subject.clear()
+   #pack_for_course.clear()
+   return subject,course
+
+def clear_list():
+    pack_for_subject.clear()
+    pack_for_course.clear()
+    return pack_for_subject,pack_for_course

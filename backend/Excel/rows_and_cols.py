@@ -40,8 +40,8 @@ def sub_object_send(id,header,slave):
             if slave[i] is not None:
                 if "-" in slave[i]:
                     target_year = slave[i].index("-")
-                    catch_year = slave[i][target_year:]
-                    real_year = "25"+str(catch_year[target_year+1:])
+                    catch_year = slave[i][target_year:][1:]
+                    real_year = "25"+str(catch_year)
                     sub_object_1[header[i]] = slave[i][:target_year]
                     sub_object_1["ปีการศึกษา"] = real_year
                 else:

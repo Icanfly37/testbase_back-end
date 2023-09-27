@@ -49,9 +49,3 @@ def OnExcel(file,db_collection=None):
     if db_collection is not None:
         OnDB_C(get_file_path("\database\serviceAccountKey.json"),db_collection,rows)
     return rows
-
-#print(OnExcel("D:/หลักสูตร"))
-
-# path = "D:/หลักสูตร.xlsx"
-# print(path)
-# print(OnExcel(path))

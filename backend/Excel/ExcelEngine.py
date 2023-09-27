@@ -1,8 +1,6 @@
 from openpyxl import *
 from Excel.rows_and_cols import *
 
-#excel = load_workbook(BytesIO(file))
-
 class Excel():
     def __init__(self,path): # path are bytes not directory names
         #self.path = BytesIO(path)
@@ -39,5 +37,3 @@ class Excel():
     #     return self.cols
     def closefile(self):
         self.excel.close()
-        
-#excel = load_workbook(BytesIO(file))
